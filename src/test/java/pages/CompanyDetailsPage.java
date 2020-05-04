@@ -13,14 +13,20 @@ public class CompanyDetailsPage extends BasePage {
     @FindBy(css = ".NoteForm_note__form__JsmUJ")
     WebElement actionsMenu;
 
+    @FindBy(name = "companyName")
+    WebElement inputCompanyName;
+
+    @FindBy(css = "button[type='Save']")
+    WebElement saveButton;
+
     public CompanyDetailsPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
         PageFactory.initElements(driver, this);
     }
 
-    @Override
-    public BasePage isPageOpened() {
-        return null;
+    public CompanyDetailsPage isPageOpened() {
+        wait.until(ExpectedConditions.visibilityOf(actionsMenu));
+        return this;
     }
 
     @Override
@@ -30,7 +36,21 @@ public class CompanyDetailsPage extends BasePage {
 
     @Step("Verifying that company details page was opened.")
     public void verifyThatCompanyWasCreated() {
-        wait.until(ExpectedConditions.visibilityOf(actionsMenu));
-
+        isPageOpened();
     }
+
+    @Step("Updating and saving company.")
+    public CompanyDetailsPage updateAndSaveCompany(String updatedName) {
+        isPageOpened();
+        inputCompanyName.sendKeys(updatedName);
+        saveButton.click();
+        return this;
+    }
+
+    @Step("Verifying that company was updated")
+    public void verifyUpdatedCompany(String updatedName) {
+        driver.navigate().refresh();
+    }
+
+
 }

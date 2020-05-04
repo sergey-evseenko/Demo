@@ -37,7 +37,7 @@ public class CompaniesPage extends BasePage {
     @Step("Clicking Create company button")
     public CreateCompanyPage createCompanyButtonClick() {
         try {
-            Thread.sleep(3000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

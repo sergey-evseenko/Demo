@@ -6,9 +6,11 @@ import models.Company;
 import models.User;
 import org.testng.annotations.Test;
 
+import java.util.UUID;
+
 
 public class InperiumTests extends BaseTest {
-    Company company = new Company("TestCompanyName", "testDomain.com");
+    Company company = new Company(UUID.randomUUID().toString(), UUID.randomUUID().toString() + ".com");
     User user = new User("administrator@inperium.com", "123");
 
     @Test(description = "Create new company.")
@@ -22,5 +24,26 @@ public class InperiumTests extends BaseTest {
                 .provideCompanyDataAndSubmit(company)
                 .verifyThatCompanyWasCreated();
     }
+
+    @Test(description = "Update company.")
+    public void updateCompany() {
+        String updatedName = UUID.randomUUID().toString();
+        loginPage
+                .openPage()
+                .login(user)
+                .searchAndOpenCompany(company)
+                .updateAndSaveCompany(updatedName)
+                .verifyUpdatedCompany(updatedName);
+    }
+
+    @Test(description = "Delete company.")
+    public void deleteCompany() {
+        loginPage
+                .openPage()
+                .login(user);
+
+
+    }
+
 
 }
