@@ -22,7 +22,7 @@ public class InperiumTests extends BaseTest {
                 .login(user)
                 .createCompanyButtonClick()
                 .provideCompanyDataAndSubmit(company)
-                .verifyThatCompanyWasCreated(company);
+                .verifyThatCompanyWasCreated();
     }
 
     @Test(description = "Update company.")
