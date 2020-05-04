@@ -50,9 +50,16 @@ public class CompaniesPage extends BasePage {
 
     @Step("Searching and opening company")
     public CompanyDetailsPage searchAndOpenCompany(Company company) {
-        String locator = "//div[contains(text(),%s)]";
+        String locator = "//div[contains(text(),'%s')]";
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.navigate().refresh();
         isPageOpened();
         searchInput.sendKeys(company.getCompanyName());
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(locator, company.getCompanyName()))));
         driver.findElement(By.xpath(String.format(locator, company.getCompanyName()))).click();
         return new CompanyDetailsPage(driver, wait);
     }

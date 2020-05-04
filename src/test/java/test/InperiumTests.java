@@ -36,14 +36,6 @@ public class InperiumTests extends BaseTest {
                 .verifyUpdatedCompany(updatedName);
     }
 
-    @Test(description = "Delete company.")
-    public void deleteCompany() {
-        loginPage
-                .openPage()
-                .login(user);
-
-
-    }
 
 
 }

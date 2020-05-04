@@ -8,6 +8,8 @@ import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
+import static org.testng.Assert.assertEquals;
+
 public class CompanyDetailsPage extends BasePage {
 
     @FindBy(css = ".NoteForm_note__form__JsmUJ")
@@ -16,7 +18,7 @@ public class CompanyDetailsPage extends BasePage {
     @FindBy(name = "companyName")
     WebElement inputCompanyName;
 
-    @FindBy(css = "button[type='Save']")
+    @FindBy(xpath = "//button[contains(text(), 'Save')]")
     WebElement saveButton;
 
     public CompanyDetailsPage(WebDriver driver, WebDriverWait wait) {
@@ -42,14 +44,18 @@ public class CompanyDetailsPage extends BasePage {
     @Step("Updating and saving company.")
     public CompanyDetailsPage updateAndSaveCompany(String updatedName) {
         isPageOpened();
+        inputCompanyName.clear();
         inputCompanyName.sendKeys(updatedName);
         saveButton.click();
         return this;
     }
 
     @Step("Verifying that company was updated")
-    public void verifyUpdatedCompany(String updatedName) {
+    public void verifyUpdatedCompany(String expectedName) {
         driver.navigate().refresh();
+        wait.until(ExpectedConditions.visibilityOf(inputCompanyName));
+        String actualName = inputCompanyName.getAttribute("value");
+        assertEquals(actualName, expectedName, "Company updating Error.");
     }
 
 

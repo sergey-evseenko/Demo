@@ -40,7 +40,7 @@ public class CreateCompanyPage extends BasePage {
     public CompanyDetailsPage provideCompanyDataAndSubmit(Company company) {
         wait.until(ExpectedConditions.visibilityOf(submitButton));
         inputDomainName.sendKeys(company.getCompanyDomain());
-        inputCompanyName.sendKeys(company.getCompanyDomain());
+        inputCompanyName.sendKeys(company.getCompanyName());
         submitButton.click();
         return new CompanyDetailsPage(driver, wait);
     }
