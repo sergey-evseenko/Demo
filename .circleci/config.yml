@@ -31,7 +31,7 @@ jobs:
           command: chmod 777 src/test/resources/webdrivers/linux/chromedriver
       - run:
           name: Running tests
-          command:  mvn clean test
+          command:  mvn -Dtest=InperiumTests#createCompany clean test
       - run:
           name: Generate allure report
           command: mvn allure:report
