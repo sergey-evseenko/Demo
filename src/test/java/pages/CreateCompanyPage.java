@@ -11,10 +11,12 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CreateCompanyPage extends BasePage {
 
-    @FindBy(css = "input[name='domainName']")
+    //@FindBy(css = "input[name='domainName']")
+    @FindBy(name = "domainName")
     WebElement inputDomainName;
 
-    @FindBy(css = "input[name='companyName']")
+    //@FindBy(css = "input[name='companyName']")
+    @FindBy(name = "companyName")
     WebElement inputCompanyName;
 
     @FindBy(css = "button[type='submit']")
@@ -26,9 +28,10 @@ public class CreateCompanyPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    @Override
-    public BasePage isPageOpened() {
-        return null;
+
+    public CreateCompanyPage isPageOpened() {
+        wait.until(ExpectedConditions.visibilityOf(submitButton));
+        return this;
     }
 
     @Override
@@ -38,7 +41,7 @@ public class CreateCompanyPage extends BasePage {
 
     @Step("Providing company domain name and company name. Clicking submit.")
     public CompanyDetailsPage provideCompanyDataAndSubmit(Company company) {
-        wait.until(ExpectedConditions.visibilityOf(submitButton));
+        isPageOpened();
         inputDomainName.sendKeys(company.getCompanyDomain());
         inputCompanyName.sendKeys(company.getCompanyName());
         submitButton.click();

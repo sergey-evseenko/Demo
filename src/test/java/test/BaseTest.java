@@ -6,17 +6,17 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
-import pages.CompaniesPage;
-import pages.CompanyDetailsPage;
-import pages.CreateCompanyPage;
-import pages.LoginPage;
+import pages.*;
 import utils.CapabilitiesGenerator;
 
 public abstract class BaseTest {
     LoginPage loginPage;
     CompaniesPage companiesPage;
+    ContactsPage contactsPage;
     CreateCompanyPage createCompanyPage;
+    CreateContactPage createContactPage;
     CompanyDetailsPage companyDetailsPage;
+    ContactDetailsPage contactDetailsPage;
 
     private WebDriver driver;
     private WebDriverWait webDriverWait;
@@ -30,6 +30,9 @@ public abstract class BaseTest {
         companyDetailsPage = new CompanyDetailsPage(driver, webDriverWait);
         companiesPage = new CompaniesPage(driver, webDriverWait);
         createCompanyPage = new CreateCompanyPage(driver, webDriverWait);
+        contactDetailsPage = new ContactDetailsPage(driver, webDriverWait);
+        contactsPage = new ContactsPage(driver, webDriverWait);
+        createContactPage = new CreateContactPage(driver, webDriverWait);
     }
 
     @AfterMethod(alwaysRun = true)

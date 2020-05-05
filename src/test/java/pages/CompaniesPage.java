@@ -25,7 +25,6 @@ public class CompaniesPage extends BasePage {
     }
 
     public BasePage isPageOpened() {
-        wait.until(ExpectedConditions.visibilityOf(createCompanyButton));
         return null;
     }
 
@@ -34,15 +33,8 @@ public class CompaniesPage extends BasePage {
         return null;
     }
 
-    @Step("Clicking Create company button")
+    @Step("Clicking 'Create company' button")
     public CreateCompanyPage createCompanyButtonClick() {
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        driver.navigate().refresh();
-        isPageOpened();
         createCompanyButton.click();
         return new CreateCompanyPage(driver, wait);
 
@@ -51,13 +43,6 @@ public class CompaniesPage extends BasePage {
     @Step("Searching and opening company")
     public CompanyDetailsPage searchAndOpenCompany(Company company) {
         String locator = "//div[contains(text(),'%s')]";
-        try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-        driver.navigate().refresh();
-        isPageOpened();
         searchInput.sendKeys(company.getCompanyName());
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(locator, company.getCompanyName()))));
         driver.findElement(By.xpath(String.format(locator, company.getCompanyName()))).click();

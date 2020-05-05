@@ -21,6 +21,9 @@ public class LoginPage extends BasePage {
     @FindBy(css = "#kc-login")
     WebElement loginButton;
 
+    @FindBy(css = ".btn-primary")
+    WebElement createCompanyButton;
+
 
     public LoginPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -44,6 +47,13 @@ public class LoginPage extends BasePage {
         inputEmail.sendKeys(user.getEmail());
         inputPassword.sendKeys(user.getPassword());
         loginButton.click();
+        try {
+            Thread.sleep(5000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        driver.navigate().refresh();
+        wait.until(ExpectedConditions.visibilityOf(createCompanyButton));
         return new CompaniesPage(driver, wait);
     }
 }
