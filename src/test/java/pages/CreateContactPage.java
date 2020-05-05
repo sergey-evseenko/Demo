@@ -2,15 +2,13 @@ package pages;
 
 import io.qameta.allure.Step;
 import models.Contact;
-import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.util.List;
 
 public class CreateContactPage extends BasePage {
 
@@ -25,6 +23,9 @@ public class CreateContactPage extends BasePage {
 
     @FindBy(name = "lastName")
     WebElement inputLastName;
+
+    @FindBy(id = "companyId")
+    WebElement inputCompany;
 
     public CreateContactPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -45,14 +46,13 @@ public class CreateContactPage extends BasePage {
     public ContactDetailsPage provideContactDataAndSubmit(Contact contact) {
         isPageOpened();
         inputEmail.sendKeys(contact.getEmail());
-        List<WebElement> dropdowns = driver.findElements(By.cssSelector(".select__value-container"));
-        dropdowns.get(0).click();
+        inputCompany.sendKeys(contact.getCompany());
         try {
             Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        driver.findElement(By.xpath("//*[contains(text(), 'Massa Consulting')]")).click();
+        inputCompany.sendKeys(Keys.ENTER);
         inputFirstName.sendKeys(contact.getFirstName());
         inputLastName.sendKeys(contact.getLastName());
         submitButton.click();
