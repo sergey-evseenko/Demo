@@ -15,7 +15,7 @@ public class CompaniesPage extends BasePage {
     @FindBy(css = ".btn-primary")
     WebElement createCompanyButton;
 
-    @FindBy(css = "input[type='search']")
+    @FindBy(name = "query")
     WebElement searchInput;
 
 
@@ -47,5 +47,10 @@ public class CompaniesPage extends BasePage {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(locator, company.getCompanyName()))));
         driver.findElement(By.xpath(String.format(locator, company.getCompanyName()))).click();
         return new CompanyDetailsPage(driver, wait);
+    }
+
+    @Step("Verifying that company was successfully deleted")
+    public void verifyThatCompanyWasDeleted(Company updatedCompany) {
+        //TBD
     }
 }

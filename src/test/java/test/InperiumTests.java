@@ -5,16 +5,17 @@ import io.qameta.allure.Link;
 import models.Company;
 import models.Contact;
 import models.User;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.UUID;
 
 
 public class InperiumTests extends BaseTest {
-    Company company = new Company(UUID.randomUUID().toString(), UUID.randomUUID().toString() + ".com");
     User user = new User("administrator@inperium.com", "123");
-    Contact contact = new Contact(UUID.randomUUID().toString() + "@gmail.com", UUID.randomUUID().toString(), UUID.randomUUID().toString(), "Erat Eget Corporation");
+    Company company = new Company(UUID.randomUUID().toString(), UUID.randomUUID().toString() + ".com");
+    Company updatedCompany = new Company(UUID.randomUUID().toString(), UUID.randomUUID().toString() + ".com");
+    Contact contact = new Contact(UUID.randomUUID().toString() + "@gmail.com", UUID.randomUUID().toString(), UUID.randomUUID().toString(), "Massa Consulting");
+    Contact updatedContact = new Contact(UUID.randomUUID().toString() + "@gmail.com", UUID.randomUUID().toString(), UUID.randomUUID().toString(), "Massa Consulting");
 
     @Test(description = "Create company.", priority = 1)
     @Link("https://sell.inperium.dev")
@@ -30,19 +31,22 @@ public class InperiumTests extends BaseTest {
 
     @Test(description = "Update company.", priority = 2)
     public void updateCompany() {
-        String updatedName = UUID.randomUUID().toString();
         loginPage
                 .openPage()
                 .login(user)
                 .searchAndOpenCompany(company)
-                .updateAndSaveCompany(updatedName)
-                .verifyUpdatedCompany(updatedName);
+                .updateAndSaveCompany(updatedCompany)
+                .verifyUpdatedCompany(updatedCompany);
     }
 
     @Test(description = "Delete contact.", priority = 3)
-    @Ignore
     public void deleteCompany() {
-
+        loginPage
+                .openPage()
+                .login(user)
+                .searchAndOpenCompany(updatedCompany)
+                .deleteCompany()
+                .verifyThatCompanyWasDeleted(updatedCompany);
     }
 
     @Test(description = "Create contact.", priority = 4)
@@ -58,16 +62,27 @@ public class InperiumTests extends BaseTest {
     }
 
     @Test(description = "Update contact.", priority = 5)
-    @Ignore
     public void updateContact() {
-
+        loginPage
+                .openPage()
+                .login(user);
+        contactsPage
+                .openPage()
+                .searchAndOpenContact(contact)
+                .updateAndSaveContact(updatedContact)
+                .verifyUpdatedContact(updatedContact);
     }
 
     @Test(description = "Delete contact.", priority = 6)
-    @Ignore
     public void deleteContact() {
-
+        loginPage
+                .openPage()
+                .login(user);
+        contactsPage
+                .openPage()
+                .searchAndOpenContact(updatedContact)
+                .deleteContact()
+                .verifyThatContactWasDeleted(updatedContact);
     }
-
 
 }

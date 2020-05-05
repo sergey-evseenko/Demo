@@ -52,7 +52,7 @@ public class CreateContactPage extends BasePage {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        driver.findElement(By.xpath("//*[contains(text(), 'Eget Ipsum LLP')]")).click();
+        driver.findElement(By.xpath("//*[contains(text(), 'Massa Consulting')]")).click();
         inputFirstName.sendKeys(contact.getFirstName());
         inputLastName.sendKeys(contact.getLastName());
         submitButton.click();

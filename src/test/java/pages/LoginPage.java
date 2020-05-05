@@ -14,13 +14,10 @@ public class LoginPage extends BasePage {
 
     @FindBy(css = "#username")
     WebElement inputEmail;
-
     @FindBy(css = "#password")
     WebElement inputPassword;
-
     @FindBy(css = "#kc-login")
     WebElement loginButton;
-
     @FindBy(css = ".btn-primary")
     WebElement createCompanyButton;
 
@@ -37,7 +34,7 @@ public class LoginPage extends BasePage {
 
     @Step("Opening login page.")
     public LoginPage openPage() {
-        driver.get("https://sell.qa.inperium.dev");
+        driver.get("https://sell.inperium.dev");
         isPageOpened();
         return this;
     }

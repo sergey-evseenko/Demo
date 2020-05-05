@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import models.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -16,6 +17,8 @@ public class ContactsPage extends BasePage {
     WebElement firstNameLabel;
     @FindBy(css = ".btn-primary")
     WebElement createContactButton;
+    @FindBy(name = "query")
+    WebElement searchInput;
 
     public ContactsPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -39,5 +42,19 @@ public class ContactsPage extends BasePage {
     public CreateContactPage createContactButtonClick() {
         createContactButton.click();
         return new CreateContactPage(driver, wait);
+    }
+
+    @Step("Searching and opening contact.")
+    public ContactDetailsPage searchAndOpenContact(Contact contact) {
+        String locator = "//div[contains(text(),'%s')]";
+        searchInput.sendKeys(contact.getFirstName());
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(locator, contact.getFirstName()))));
+        driver.findElement(By.xpath(String.format(locator, contact.getFirstName()))).click();
+        return new ContactDetailsPage(driver, wait);
+    }
+
+    @Step("Verifying that contact was successfully deleted")
+    public void verifyThatContactWasDeleted(Contact updatedContact) {
+        //TBD
     }
 }
