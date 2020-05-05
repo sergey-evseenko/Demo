@@ -39,7 +39,7 @@ public class InperiumTests extends BaseTest {
                 .verifyUpdatedCompany(updatedCompany);
     }
 
-    @Test(description = "3. Delete contact.", priority = 3)
+    @Test(description = "3. Delete company.", priority = 3)
     public void deleteCompany() {
         loginPage
                 .openPage()
