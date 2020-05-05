@@ -33,7 +33,6 @@ public class ContactDetailsPage extends BasePage {
 
     @Override
     public ContactDetailsPage isPageOpened() {
-        wait.until(ExpectedConditions.visibilityOf(actionsMenu));
         return this;
     }
 
@@ -43,13 +42,17 @@ public class ContactDetailsPage extends BasePage {
     }
 
     @Step("Verifying that contacts details page was opened.")
-    public void verifyThatContactWasCreated() {
-        isPageOpened();
+    public void verifyThatContactWasCreated(Contact contact) {
+        wait.until(ExpectedConditions.visibilityOf(inputFirstName));
+        String actualFirstName = inputFirstName.getAttribute("value");
+        assertEquals(actualFirstName, contact.getFirstName(), "Contact creation error. Contact first name.");
+        String actualLastName = inputLastName.getAttribute("value");
+        assertEquals(actualLastName, contact.getLastName(), "Contact creation error. Contact last name.");
     }
 
     @Step("Updating and saving contact.")
     public ContactDetailsPage updateAndSaveContact(Contact updatedContact) {
-        isPageOpened();
+        wait.until(ExpectedConditions.visibilityOf(inputFirstName));
         inputFirstName.clear();
         inputFirstName.sendKeys(updatedContact.getFirstName());
         inputLastName.clear();
@@ -63,14 +66,14 @@ public class ContactDetailsPage extends BasePage {
         driver.navigate().refresh();
         wait.until(ExpectedConditions.visibilityOf(inputFirstName));
         String actualFirstName = inputFirstName.getAttribute("value");
-        assertEquals(actualFirstName, updatedContact.getFirstName(), "Company name updating Error.");
+        assertEquals(actualFirstName, updatedContact.getFirstName(), "Contact updating error. Contact first name.");
         String actualLastName = inputLastName.getAttribute("value");
-        assertEquals(actualLastName, updatedContact.getLastName(), "Company domain updating Error.");
+        assertEquals(actualLastName, updatedContact.getLastName(), "Contact updating error. Contact last name.");
     }
 
     @Step("Deleting contact")
     public ContactsPage deleteContact() {
-        isPageOpened();
+        wait.until(ExpectedConditions.visibilityOf(inputFirstName));
         actionsButton.click();
         deleteButton.click();
         return new ContactsPage(driver, wait);

@@ -37,7 +37,6 @@ public class CompanyDetailsPage extends BasePage {
     }
 
     public CompanyDetailsPage isPageOpened() {
-        wait.until(ExpectedConditions.visibilityOf(actionsMenu));
         return this;
     }
 
@@ -47,13 +46,17 @@ public class CompanyDetailsPage extends BasePage {
     }
 
     @Step("Verifying that company details page was opened.")
-    public void verifyThatCompanyWasCreated() {
-        isPageOpened();
+    public void verifyThatCompanyWasCreated(Company company) {
+        wait.until(ExpectedConditions.visibilityOf(inputCompanyName));
+        String actualCompanyName = inputCompanyName.getAttribute("value");
+        assertEquals(actualCompanyName, company.getCompanyName(), "Company name updating Error.");
+        String actualDomainName = inputDomainName.getAttribute("value");
+        assertEquals(actualDomainName, company.getCompanyDomain(), "Company domain updating Error.");
     }
 
     @Step("Updating and saving company.")
     public CompanyDetailsPage updateAndSaveCompany(Company updatedCompany) {
-        isPageOpened();
+        wait.until(ExpectedConditions.visibilityOf(inputCompanyName));
         inputCompanyName.clear();
         inputCompanyName.sendKeys(updatedCompany.getCompanyName());
         inputDomainName.clear();
@@ -74,7 +77,7 @@ public class CompanyDetailsPage extends BasePage {
 
     @Step("Deleting company")
     public CompaniesPage deleteCompany() {
-        isPageOpened();
+        wait.until(ExpectedConditions.visibilityOf(inputCompanyName));
         actionsButton.click();
         deleteButton.click();
         return new CompaniesPage(driver, wait);

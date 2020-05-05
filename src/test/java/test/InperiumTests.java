@@ -26,7 +26,7 @@ public class InperiumTests extends BaseTest {
                 .login(user)
                 .createCompanyButtonClick()
                 .provideCompanyDataAndSubmit(company)
-                .verifyThatCompanyWasCreated();
+                .verifyThatCompanyWasCreated(company);
     }
 
     @Test(description = "2. Update company.", priority = 2)
@@ -58,7 +58,7 @@ public class InperiumTests extends BaseTest {
                 .openPage()
                 .createContactButtonClick()
                 .provideContactDataAndSubmit(contact)
-                .verifyThatContactWasCreated();
+                .verifyThatContactWasCreated(contact);
     }
 
     @Test(description = "5. Update contact.", priority = 5)
