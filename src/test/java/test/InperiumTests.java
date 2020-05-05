@@ -17,7 +17,7 @@ public class InperiumTests extends BaseTest {
     Contact contact = new Contact(UUID.randomUUID().toString() + "@gmail.com", UUID.randomUUID().toString(), UUID.randomUUID().toString(), "Massa Consulting");
     Contact updatedContact = new Contact(UUID.randomUUID().toString() + "@gmail.com", UUID.randomUUID().toString(), UUID.randomUUID().toString(), "Massa Consulting");
 
-    @Test(description = "Create company.", priority = 1)
+    @Test(description = "1. Create company.", priority = 1)
     @Link("https://sell.inperium.dev")
     @Issue("INS-1845")
     public void createCompany() {
@@ -29,7 +29,7 @@ public class InperiumTests extends BaseTest {
                 .verifyThatCompanyWasCreated();
     }
 
-    @Test(description = "Update company.", priority = 2)
+    @Test(description = "2. Update company.", priority = 2)
     public void updateCompany() {
         loginPage
                 .openPage()
@@ -39,7 +39,7 @@ public class InperiumTests extends BaseTest {
                 .verifyUpdatedCompany(updatedCompany);
     }
 
-    @Test(description = "Delete contact.", priority = 3)
+    @Test(description = "3. Delete contact.", priority = 3)
     public void deleteCompany() {
         loginPage
                 .openPage()
@@ -49,7 +49,7 @@ public class InperiumTests extends BaseTest {
                 .verifyThatCompanyWasDeleted(updatedCompany);
     }
 
-    @Test(description = "Create contact.", priority = 4)
+    @Test(description = "4. Create contact.", priority = 4)
     public void createContact() {
         loginPage
                 .openPage()
@@ -61,7 +61,7 @@ public class InperiumTests extends BaseTest {
                 .verifyThatContactWasCreated();
     }
 
-    @Test(description = "Update contact.", priority = 5)
+    @Test(description = "5. Update contact.", priority = 5)
     public void updateContact() {
         loginPage
                 .openPage()
@@ -73,7 +73,7 @@ public class InperiumTests extends BaseTest {
                 .verifyUpdatedContact(updatedContact);
     }
 
-    @Test(description = "Delete contact.", priority = 6)
+    @Test(description = "6. Delete contact.", priority = 6)
     public void deleteContact() {
         loginPage
                 .openPage()
