@@ -41,7 +41,7 @@ public class ContactDetailsPage extends BasePage {
         return null;
     }
 
-    @Step("Verifying that contacts details page was opened.")
+    @Step("Verifying that contact was correctly created.")
     public void verifyThatContactWasCreated(Contact contact) {
         wait.until(ExpectedConditions.visibilityOf(inputFirstName));
         String actualFirstName = inputFirstName.getAttribute("value");

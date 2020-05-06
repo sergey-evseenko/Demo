@@ -45,13 +45,13 @@ public class CompanyDetailsPage extends BasePage {
         return null;
     }
 
-    @Step("Verifying that company details page was opened.")
+    @Step("Verifying that company was correctly created.")
     public void verifyThatCompanyWasCreated(Company company) {
         wait.until(ExpectedConditions.visibilityOf(inputCompanyName));
         String actualCompanyName = inputCompanyName.getAttribute("value");
-        assertEquals(actualCompanyName, company.getCompanyName(), "Company name updating Error.");
+        assertEquals(actualCompanyName, company.getCompanyName(), "Company creating Error. Name.");
         String actualDomainName = inputDomainName.getAttribute("value");
-        assertEquals(actualDomainName, company.getCompanyDomain(), "Company domain updating Error.");
+        assertEquals(actualDomainName, company.getCompanyDomain(), "Company creating Error. Domain");
     }
 
     @Step("Updating and saving company.")
