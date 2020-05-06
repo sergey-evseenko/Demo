@@ -85,4 +85,5 @@ public class InperiumTests extends BaseTest {
                 .verifyThatContactWasDeleted(updatedContact);
     }
 
+
 }

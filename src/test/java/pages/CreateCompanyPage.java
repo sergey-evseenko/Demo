@@ -43,6 +43,11 @@ public class CreateCompanyPage extends BasePage {
     public CompanyDetailsPage provideCompanyDataAndSubmit(Company company) {
         isPageOpened();
         inputDomainName.sendKeys(company.getCompanyDomain());
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         inputCompanyName.sendKeys(company.getCompanyName());
         submitButton.click();
         return new CompanyDetailsPage(driver, wait);
