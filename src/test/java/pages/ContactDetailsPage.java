@@ -8,6 +8,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.AllureUtils;
 
 import static org.testng.Assert.assertEquals;
 
@@ -43,7 +44,8 @@ public class ContactDetailsPage extends BasePage {
 
     @Step("Verifying that contact was correctly created.")
     public void verifyThatContactWasCreated(Contact contact) {
-        wait.until(ExpectedConditions.visibilityOf(inputFirstName));
+        wait.until(ExpectedConditions.visibilityOf(actionsButton));
+        AllureUtils.takeScreenshot(driver);
         String actualFirstName = inputFirstName.getAttribute("value");
         assertEquals(actualFirstName, contact.getFirstName(), "Contact creation error. Contact first name.");
         String actualLastName = inputLastName.getAttribute("value");

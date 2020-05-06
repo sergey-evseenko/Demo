@@ -9,13 +9,12 @@ import org.testng.annotations.Test;
 
 import java.util.UUID;
 
-
 public class InperiumTests extends BaseTest {
     User user = new User("administrator@inperium.com", "123");
     Company company = new Company(UUID.randomUUID().toString(), UUID.randomUUID().toString() + ".com");
     Company updatedCompany = new Company(UUID.randomUUID().toString(), UUID.randomUUID().toString() + ".com");
-    Contact contact = new Contact(UUID.randomUUID().toString() + "@gmail.com", UUID.randomUUID().toString(), UUID.randomUUID().toString(), "Massa Consulting");
-    Contact updatedContact = new Contact(UUID.randomUUID().toString() + "@gmail.com", UUID.randomUUID().toString(), UUID.randomUUID().toString(), "Massa Consulting");
+    Contact contact = new Contact(UUID.randomUUID().toString() + "@gmail.com", UUID.randomUUID().toString(), UUID.randomUUID().toString(), "Erat Eget Corporation");
+    Contact updatedContact = new Contact(UUID.randomUUID().toString() + "@gmail.com", UUID.randomUUID().toString(), UUID.randomUUID().toString(), "Erat Eget Corporation");
 
     @Test(description = "1. Create company.", priority = 1)
     @Link("https://sell.inperium.dev")

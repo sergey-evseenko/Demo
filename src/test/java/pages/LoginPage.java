@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import models.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -8,7 +9,10 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.AllureUtils;
 
+
+@Log4j2
 public class LoginPage extends BasePage {
 
 
@@ -36,6 +40,8 @@ public class LoginPage extends BasePage {
     public LoginPage openPage() {
         driver.get("https://sell.inperium.dev");
         isPageOpened();
+        AllureUtils.takeScreenshot(driver);
+        log.info("Login page was success opened.");
         return this;
     }
 
@@ -51,6 +57,8 @@ public class LoginPage extends BasePage {
         }
         driver.navigate().refresh();
         wait.until(ExpectedConditions.visibilityOf(createCompanyButton));
+        AllureUtils.takeScreenshot(driver);
+        log.info("User was successfully logged in.");
         return new CompaniesPage(driver, wait);
     }
 }

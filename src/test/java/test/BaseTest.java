@@ -9,6 +9,7 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import pages.*;
 import utils.CapabilitiesGenerator;
+import utils.TestListener;
 
 @Listeners(TestListener.class)
 public abstract class BaseTest {

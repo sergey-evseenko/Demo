@@ -9,6 +9,7 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.AllureUtils;
 
 import java.util.List;
 
@@ -35,6 +36,7 @@ public class ContactsPage extends BasePage {
         List<WebElement> menuButtons = driver.findElements(By.cssSelector(".navbar-link"));
         menuButtons.get(1).click();
         isPageOpened();
+        AllureUtils.takeScreenshot(driver);
         return this;
     }
 

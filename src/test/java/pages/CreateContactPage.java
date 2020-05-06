@@ -3,12 +3,14 @@ package pages;
 import io.qameta.allure.Step;
 import models.Contact;
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.AllureUtils;
 
 public class CreateContactPage extends BasePage {
 
@@ -40,7 +42,7 @@ public class CreateContactPage extends BasePage {
 
     public void sleep() {
         try {
-            Thread.sleep(300);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
@@ -49,16 +51,16 @@ public class CreateContactPage extends BasePage {
     @Step("Providing contact email, First name, Last name, company. Clicking submit.")
     public ContactDetailsPage provideContactDataAndSubmit(Contact contact) {
         String locator = "//div[contains(text(),'%s')]";
+        String param = "arguments[0].value='%s';";
         isPageOpened();
+        AllureUtils.takeScreenshot(driver);
         inputEmail.sendKeys(contact.getEmail());
-        sleep();
         dropdownCompany.click();
+        sleep();
         driver.findElement(By.xpath(String.format(locator, contact.getCompany()))).click();
-        sleep();
-        inputFirstName.sendKeys(contact.getFirstName());
-        sleep();
-        inputLastName.sendKeys(contact.getLastName());
-        sleep();
+        ((JavascriptExecutor) driver).executeScript(String.format(param, contact.getFirstName()), inputFirstName);
+        ((JavascriptExecutor) driver).executeScript(String.format(param, contact.getLastName()), inputLastName);
+        AllureUtils.takeScreenshot(driver);
         submitButton.click();
         return new ContactDetailsPage(driver, wait);
 
