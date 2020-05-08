@@ -20,9 +20,9 @@ public class ContactDetailsPage extends BasePage {
     WebElement inputFirstName;
     @FindBy(name = "lastName")
     WebElement inputLastName;
-    @FindBy(xpath = "//button[contains(text(), 'Save')]")
+    @FindBy(xpath = "//div[contains(text(), 'Save')]")
     WebElement saveButton;
-    @FindBy(xpath = "//button[contains(text(), 'Actions')]")
+    @FindBy(xpath = "//div[contains(text(), 'Actions')]")
     WebElement actionsButton;
     @FindBy(xpath = "//div[contains(text(), 'Delete')]")
     WebElement deleteButton;

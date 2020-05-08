@@ -38,7 +38,7 @@ public abstract class BaseTest {
         createContactPage = new CreateContactPage(driver, webDriverWait);
     }
 
-    @AfterMethod(alwaysRun = true)
+    @AfterMethod(description = "Closing chrome Driver.", alwaysRun = true)
     public void closeDriver() {
         driver.quit();
     }

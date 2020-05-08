@@ -22,7 +22,7 @@ public class LoginPage extends BasePage {
     WebElement inputPassword;
     @FindBy(css = "#kc-login")
     WebElement loginButton;
-    @FindBy(css = ".btn-primary")
+    @FindBy(xpath = "//div[contains(text(), 'Create')]")
     WebElement createCompanyButton;
 
 

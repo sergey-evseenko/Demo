@@ -16,7 +16,7 @@ import java.util.List;
 public class ContactsPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(), 'First Name')]")
     WebElement firstNameLabel;
-    @FindBy(css = ".btn-primary")
+    @FindBy(xpath = "//div[contains(text(), 'Create')]")
     WebElement createContactButton;
     @FindBy(name = "query")
     WebElement searchInput;

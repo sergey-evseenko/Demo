@@ -12,7 +12,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CompaniesPage extends BasePage {
 
-    @FindBy(css = ".btn-primary")
+    @FindBy(xpath = "//div[contains(text(), 'Create')]")
     WebElement createCompanyButton;
 
     @FindBy(name = "query")
