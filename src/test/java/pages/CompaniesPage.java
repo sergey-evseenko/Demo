@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import models.Company;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -9,10 +10,12 @@ import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import utils.AllureUtils;
 
+@Log4j2
 public class CompaniesPage extends BasePage {
 
-    @FindBy(xpath = "//div[contains(text(), 'Create')]")
+    @FindBy(xpath = "//span[contains(text(), 'Create')]")
     WebElement createCompanyButton;
 
     @FindBy(name = "query")
@@ -24,18 +27,25 @@ public class CompaniesPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public BasePage isPageOpened() {
-        return null;
+    public CompaniesPage isPageOpened() {
+        wait.until(ExpectedConditions.visibilityOf(createCompanyButton));
+        return this;
     }
 
     @Override
-    public BasePage openPage() {
-        return null;
+    @Step("Opening 'Companies' page")
+    public CompaniesPage openPage() {
+        driver.get("https://sell.qa.inperium.dev/companies");
+        isPageOpened();
+        AllureUtils.takeScreenshot(driver);
+        log.info("'Companies' page was success opened.");
+        return this;
     }
 
     @Step("Clicking 'Create company' button")
     public CreateCompanyPage createCompanyButtonClick() {
         createCompanyButton.click();
+        log.info("'Create company' button was clicked.");
         return new CreateCompanyPage(driver, wait);
 
     }

@@ -5,6 +5,7 @@ import io.qameta.allure.Link;
 import models.Company;
 import models.Contact;
 import models.User;
+import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.UUID;
@@ -17,18 +18,21 @@ public class InperiumTests extends BaseTest {
     Contact updatedContact = new Contact(UUID.randomUUID().toString() + "@gmail.com", UUID.randomUUID().toString(), UUID.randomUUID().toString(), "Erat Eget Corporation");
 
     @Test(description = "1. Create company.", priority = 1)
-    @Link("https://sell.inperium.dev")
+    @Link("https://sell.qa.inperium.dev")
     @Issue("INS-1845")
     public void createCompany() {
         loginPage
                 .openPage()
-                .login(user)
+                .login(user);
+        companiesPage
+                .openPage()
                 .createCompanyButtonClick()
                 .provideCompanyDataAndSubmit(company)
                 .verifyThatCompanyWasCreated(company);
     }
 
     @Test(description = "2. Update company.", priority = 2)
+    @Ignore
     public void updateCompany() {
         loginPage
                 .openPage()
@@ -39,6 +43,7 @@ public class InperiumTests extends BaseTest {
     }
 
     @Test(description = "3. Delete company.", priority = 3)
+    @Ignore
     public void deleteCompany() {
         loginPage
                 .openPage()
@@ -61,6 +66,7 @@ public class InperiumTests extends BaseTest {
     }
 
     @Test(description = "5. Update contact.", priority = 5)
+    @Ignore
     public void updateContact() {
         loginPage
                 .openPage()
@@ -73,6 +79,7 @@ public class InperiumTests extends BaseTest {
     }
 
     @Test(description = "6. Delete contact.", priority = 6)
+    @Ignore
     public void deleteContact() {
         loginPage
                 .openPage()

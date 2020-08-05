@@ -3,7 +3,6 @@ package pages;
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
 import models.Company;
-import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,11 +38,13 @@ public class CreateCompanyPage extends BasePage {
 
     @Step("Providing company domain name and company name. Clicking submit.")
     public CompanyDetailsPage provideCompanyDataAndSubmit(Company company) {
-        String param = "arguments[0].value='%s';";
+        //String param = "arguments[0].value='%s';";
         isPageOpened();
         AllureUtils.takeScreenshot(driver);
+        log.info("'Create companies' pop-up was success opened.");
         inputDomainName.sendKeys(company.getCompanyDomain());
-        ((JavascriptExecutor) driver).executeScript(String.format(param, company.getCompanyName()), inputCompanyName);
+        inputCompanyName.sendKeys(company.getCompanyName());
+        //((JavascriptExecutor) driver).executeScript(String.format(param, company.getCompanyName()), inputCompanyName);
         AllureUtils.takeScreenshot(driver);
         submitButton.click();
         return new CompanyDetailsPage(driver, wait);

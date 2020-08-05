@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import models.Contact;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -12,6 +13,7 @@ import utils.AllureUtils;
 
 import static org.testng.Assert.assertEquals;
 
+@Log4j2
 public class ContactDetailsPage extends BasePage {
 
     @FindBy(css = ".NoteForm_note__form__JsmUJ")
@@ -22,7 +24,7 @@ public class ContactDetailsPage extends BasePage {
     WebElement inputLastName;
     @FindBy(xpath = "//div[contains(text(), 'Save')]")
     WebElement saveButton;
-    @FindBy(xpath = "//div[contains(text(), 'Actions')]")
+    @FindBy(xpath = "//span[contains(text(), '•••')]")
     WebElement actionsButton;
     @FindBy(xpath = "//div[contains(text(), 'Delete')]")
     WebElement deleteButton;
@@ -34,6 +36,7 @@ public class ContactDetailsPage extends BasePage {
 
     @Override
     public ContactDetailsPage isPageOpened() {
+        wait.until(ExpectedConditions.visibilityOf(actionsButton));
         return this;
     }
 
@@ -44,12 +47,14 @@ public class ContactDetailsPage extends BasePage {
 
     @Step("Verifying that contact was correctly created.")
     public void verifyThatContactWasCreated(Contact contact) {
-        wait.until(ExpectedConditions.visibilityOf(actionsButton));
+        isPageOpened();
         AllureUtils.takeScreenshot(driver);
+        log.info("'Contact details' page was success opened.");
         String actualFirstName = inputFirstName.getAttribute("value");
         assertEquals(actualFirstName, contact.getFirstName(), "Contact creation error. Contact first name.");
         String actualLastName = inputLastName.getAttribute("value");
         assertEquals(actualLastName, contact.getLastName(), "Contact creation error. Contact last name.");
+        log.info("Contact was successfully created. Contact first name: " + contact.getFirstName());
     }
 
     @Step("Updating and saving contact.")

@@ -1,6 +1,7 @@
 package pages;
 
 import io.qameta.allure.Step;
+import lombok.extern.log4j.Log4j2;
 import models.Contact;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -11,12 +12,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.AllureUtils;
 
-import java.util.List;
-
+@Log4j2
 public class ContactsPage extends BasePage {
-    @FindBy(xpath = "//span[contains(text(), 'First Name')]")
-    WebElement firstNameLabel;
-    @FindBy(xpath = "//div[contains(text(), 'Create')]")
+    @FindBy(xpath = "//span[contains(text(), 'Create')]")
     WebElement createContactButton;
     @FindBy(name = "query")
     WebElement searchInput;
@@ -27,22 +25,29 @@ public class ContactsPage extends BasePage {
     }
 
     public ContactsPage isPageOpened() {
-        wait.until(ExpectedConditions.visibilityOf(firstNameLabel));
+        wait.until(ExpectedConditions.visibilityOf(createContactButton));
         return this;
     }
 
     @Step("Opening 'Contacts' page.")
     public ContactsPage openPage() {
-        List<WebElement> menuButtons = driver.findElements(By.cssSelector(".navbar-link"));
+        /*List<WebElement> menuButtons = driver.findElements(By.cssSelector(".navbar-link"));
         menuButtons.get(1).click();
         isPageOpened();
         AllureUtils.takeScreenshot(driver);
+        return this;*/
+
+        driver.get("https://sell.qa.inperium.dev/contacts");
+        isPageOpened();
+        AllureUtils.takeScreenshot(driver);
+        log.info("'Contacts' page was success opened.");
         return this;
     }
 
     @Step("Clicking 'Create contact' button")
     public CreateContactPage createContactButtonClick() {
         createContactButton.click();
+        log.info("'Create contact' button was clicked.");
         return new CreateContactPage(driver, wait);
     }
 

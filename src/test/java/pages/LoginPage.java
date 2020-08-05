@@ -22,8 +22,8 @@ public class LoginPage extends BasePage {
     WebElement inputPassword;
     @FindBy(css = "#kc-login")
     WebElement loginButton;
-    @FindBy(xpath = "//div[contains(text(), 'Create')]")
-    WebElement createCompanyButton;
+    @FindBy(xpath = "//div[contains(text(), 'Deals Revenue')]")
+    WebElement widgetDealsRevenue;
 
 
     public LoginPage(WebDriver driver, WebDriverWait wait) {
@@ -38,7 +38,7 @@ public class LoginPage extends BasePage {
 
     @Step("Opening login page.")
     public LoginPage openPage() {
-        driver.get("https://sell.inperium.dev");
+        driver.get("https://sell.qa.inperium.dev");
         isPageOpened();
         AllureUtils.takeScreenshot(driver);
         log.info("Login page was success opened.");
@@ -50,13 +50,13 @@ public class LoginPage extends BasePage {
         inputEmail.sendKeys(user.getEmail());
         inputPassword.sendKeys(user.getPassword());
         loginButton.click();
-        try {
+        /*try {
             Thread.sleep(5000);
         } catch (InterruptedException e) {
             e.printStackTrace();
-        }
-        driver.navigate().refresh();
-        wait.until(ExpectedConditions.visibilityOf(createCompanyButton));
+        }*/
+        /*driver.navigate().refresh();*/
+        wait.until(ExpectedConditions.visibilityOf(widgetDealsRevenue));
         AllureUtils.takeScreenshot(driver);
         log.info("User was successfully logged in.");
         return new CompaniesPage(driver, wait);

@@ -28,7 +28,7 @@ public class CompanyDetailsPage extends BasePage {
     @FindBy(xpath = "//div[contains(text(), 'Save')]")
     WebElement saveButton;
 
-    @FindBy(xpath = "//div[contains(text(), 'Actions')]")
+    @FindBy(xpath = "//span[contains(text(), '•••')]")
     WebElement actionsButton;
 
     @FindBy(xpath = "//div[contains(text(), 'Delete')]")
@@ -44,14 +44,16 @@ public class CompanyDetailsPage extends BasePage {
     }
 
     @Override
-    public BasePage openPage() {
-        return null;
+    public CompanyDetailsPage openPage() {
+        wait.until(ExpectedConditions.visibilityOf(actionsButton));
+        return this;
     }
 
     @Step("Verifying that company was correctly created.")
     public void verifyThatCompanyWasCreated(Company company) {
-        wait.until(ExpectedConditions.visibilityOf(actionsButton));
+        isPageOpened();
         AllureUtils.takeScreenshot(driver);
+        log.info("'Company details' page was success opened.");
         String actualCompanyName = inputCompanyName.getAttribute("value");
         assertEquals(actualCompanyName, company.getCompanyName(), "Company creating Error. Name.");
         String actualDomainName = inputDomainName.getAttribute("value");
