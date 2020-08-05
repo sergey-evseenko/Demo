@@ -54,6 +54,7 @@ public class InperiumTests extends BaseTest {
     }
 
     @Test(description = "4. Create contact.", priority = 4)
+    @Ignore
     public void createContact() {
         loginPage
                 .openPage()
