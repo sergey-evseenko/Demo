@@ -62,7 +62,7 @@ public class CreateContactPage extends BasePage {
         inputFirstName.sendKeys(contact.getFirstName());
         inputLastName.sendKeys(contact.getLastName());
         dropdownCompany.click();
-        //sleep();
+        wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(String.format(locator, contact.getCompany())))));
         driver.findElement(By.xpath(String.format(locator, contact.getCompany()))).click();
         /*
         ((JavascriptExecutor) driver).executeScript(String.format(param, contact.getFirstName()), inputFirstName);
