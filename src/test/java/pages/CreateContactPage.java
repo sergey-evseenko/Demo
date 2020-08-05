@@ -61,7 +61,9 @@ public class CreateContactPage extends BasePage {
         inputEmail.sendKeys(contact.getEmail());
         inputFirstName.sendKeys(contact.getFirstName());
         inputLastName.sendKeys(contact.getLastName());
+        AllureUtils.takeScreenshot(driver);
         dropdownCompany.click();
+        AllureUtils.takeScreenshot(driver);
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(String.format(locator, contact.getCompany())))));
         driver.findElement(By.xpath(String.format(locator, contact.getCompany()))).click();
         /*
