@@ -28,8 +28,8 @@ public class CompanyDetailsPage extends BasePage {
     @FindBy(xpath = "//div[contains(text(), 'Save')]")
     WebElement saveButton;
 
-    @FindBy(xpath = "//span[contains(text(), '•••')]")
-    WebElement actionsButton;
+    @FindBy(xpath = "//p[text()='Company Created']")
+    WebElement companyCreated;
 
     @FindBy(xpath = "//div[contains(text(), 'Delete')]")
     WebElement deleteButton;
@@ -39,18 +39,27 @@ public class CompanyDetailsPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    public void sleep() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public CompanyDetailsPage isPageOpened() {
         return this;
     }
 
     @Override
     public CompanyDetailsPage openPage() {
-        wait.until(ExpectedConditions.visibilityOf(actionsButton));
+        wait.until(ExpectedConditions.visibilityOf(companyCreated));
         return this;
     }
 
     @Step("Verifying that company was correctly created.")
     public void verifyThatCompanyWasCreated(Company company) {
+        sleep();
         isPageOpened();
         AllureUtils.takeScreenshot(driver);
         log.info("'Company details' page was success opened.");
@@ -85,7 +94,7 @@ public class CompanyDetailsPage extends BasePage {
     @Step("Deleting company")
     public CompaniesPage deleteCompany() {
         wait.until(ExpectedConditions.visibilityOf(inputCompanyName));
-        actionsButton.click();
+        companyCreated.click();
         deleteButton.click();
         return new CompaniesPage(driver, wait);
     }

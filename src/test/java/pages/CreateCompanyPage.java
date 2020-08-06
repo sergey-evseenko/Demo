@@ -46,6 +46,7 @@ public class CreateCompanyPage extends BasePage {
         inputCompanyName.sendKeys(company.getCompanyName());
         //((JavascriptExecutor) driver).executeScript(String.format(param, company.getCompanyName()), inputCompanyName);
         AllureUtils.takeScreenshot(driver);
+        wait.until(ExpectedConditions.elementToBeClickable(submitButton));
         submitButton.click();
         return new CompanyDetailsPage(driver, wait);
     }

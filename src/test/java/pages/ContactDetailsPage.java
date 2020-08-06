@@ -24,8 +24,8 @@ public class ContactDetailsPage extends BasePage {
     WebElement inputLastName;
     @FindBy(xpath = "//div[contains(text(), 'Save')]")
     WebElement saveButton;
-    @FindBy(xpath = "//span[contains(text(), '•••')]")
-    WebElement actionsButton;
+    @FindBy(xpath = "//p[text()='Company Created']")
+    WebElement contactCreated;
     @FindBy(xpath = "//div[contains(text(), 'Delete')]")
     WebElement deleteButton;
 
@@ -34,9 +34,17 @@ public class ContactDetailsPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    public void sleep() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Override
     public ContactDetailsPage isPageOpened() {
-        wait.until(ExpectedConditions.visibilityOf(actionsButton));
+        wait.until(ExpectedConditions.visibilityOf(contactCreated));
         return this;
     }
 
@@ -47,6 +55,7 @@ public class ContactDetailsPage extends BasePage {
 
     @Step("Verifying that contact was correctly created.")
     public void verifyThatContactWasCreated(Contact contact) {
+        sleep();
         isPageOpened();
         AllureUtils.takeScreenshot(driver);
         log.info("'Contact details' page was success opened.");
@@ -81,7 +90,7 @@ public class ContactDetailsPage extends BasePage {
     @Step("Deleting contact")
     public ContactsPage deleteContact() {
         wait.until(ExpectedConditions.visibilityOf(inputFirstName));
-        actionsButton.click();
+        contactCreated.click();
         deleteButton.click();
         return new ContactsPage(driver, wait);
     }
