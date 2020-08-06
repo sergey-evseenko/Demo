@@ -42,14 +42,6 @@ public class CreateContactPage extends BasePage {
         return null;
     }
 
-    public void sleep() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-    }
-
     @Step("Providing contact email, First name, Last name, company. Clicking submit.")
     public ContactDetailsPage provideContactDataAndSubmit(Contact contact) {
         String locator = "//div[contains(text(),'%s')]";

@@ -50,12 +50,6 @@ public class LoginPage extends BasePage {
         inputEmail.sendKeys(user.getEmail());
         inputPassword.sendKeys(user.getPassword());
         loginButton.click();
-        /*try {
-            Thread.sleep(5000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }*/
-        /*driver.navigate().refresh();*/
         wait.until(ExpectedConditions.visibilityOf(widgetDealsRevenue));
         AllureUtils.takeScreenshot(driver);
         log.info("User was successfully logged in.");

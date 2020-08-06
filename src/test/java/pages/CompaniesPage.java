@@ -12,6 +12,10 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.AllureUtils;
 
+import java.util.List;
+
+import static org.testng.Assert.assertEquals;
+
 @Log4j2
 public class CompaniesPage extends BasePage {
 
@@ -62,7 +66,18 @@ public class CompaniesPage extends BasePage {
     }
 
     @Step("Verifying that company was successfully deleted")
-    public void verifyThatCompanyWasDeleted(Company updatedCompany) {
-        //TBD
+    public CompaniesPage verifyThatCompanyWasDeleted(Company company) {
+        String locator = "//span[contains(text(),'%s')]";
+        isPageOpened();
+        AllureUtils.takeScreenshot(driver);
+        log.info("'Companies' page was opened.");
+        searchInput.sendKeys(company.getCompanyName());
+        sleep();
+        sleep();
+        List<WebElement> deletedCompany = driver.findElements(By.xpath(String.format(locator, company.getCompanyName())));
+        assertEquals(deletedCompany.size(), 0, "Company deleting updating Error.");
+        AllureUtils.takeScreenshot(driver);
+        log.info("Company with name: " + company.getCompanyName() + " was success deleted.");
+        return this;
     }
 }

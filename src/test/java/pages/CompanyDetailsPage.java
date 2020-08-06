@@ -16,9 +16,6 @@ import static org.testng.Assert.assertEquals;
 @Log4j2
 public class CompanyDetailsPage extends BasePage {
 
-    @FindBy(css = ".NoteForm_note__form__JsmUJ")
-    WebElement actionsMenu;
-
     @FindBy(name = "companyName")
     WebElement inputCompanyName;
 
@@ -34,6 +31,9 @@ public class CompanyDetailsPage extends BasePage {
     @FindBy(xpath = "//div[contains(text(), 'Delete')]")
     WebElement deleteButton;
 
+    @FindBy(xpath = "//span[contains(text(),'•••')]")
+    WebElement actionsMenu;
+
     public CompanyDetailsPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
         PageFactory.initElements(driver, this);
@@ -47,14 +47,6 @@ public class CompanyDetailsPage extends BasePage {
     @Override
     public BasePage openPage() {
         return null;
-    }
-
-    public void sleep() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     @Step("Verifying that company was correctly created.")
@@ -99,9 +91,12 @@ public class CompanyDetailsPage extends BasePage {
 
     @Step("Deleting company")
     public CompaniesPage deleteCompany() {
-        wait.until(ExpectedConditions.visibilityOf(inputCompanyName));
-        companyCreated.click();
+        isPageOpened();
+        AllureUtils.takeScreenshot(driver);
+        log.info("Company was opened.");
+        actionsMenu.click();
         deleteButton.click();
+        log.info("Delete button was clicked.");
         return new CompaniesPage(driver, wait);
     }
 

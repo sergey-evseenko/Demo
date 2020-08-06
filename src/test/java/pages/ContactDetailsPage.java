@@ -16,8 +16,6 @@ import static org.testng.Assert.assertEquals;
 @Log4j2
 public class ContactDetailsPage extends BasePage {
 
-    @FindBy(css = ".NoteForm_note__form__JsmUJ")
-    WebElement actionsMenu;
     @FindBy(name = "firstName")
     WebElement inputFirstName;
     @FindBy(name = "lastName")
@@ -28,6 +26,8 @@ public class ContactDetailsPage extends BasePage {
     WebElement contactCreated;
     @FindBy(xpath = "//div[contains(text(), 'Delete')]")
     WebElement deleteButton;
+    @FindBy(xpath = "//span[contains(text(),'•••')]")
+    WebElement actionsMenu;
 
     public ContactDetailsPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
@@ -43,14 +43,6 @@ public class ContactDetailsPage extends BasePage {
     @Override
     public BasePage openPage() {
         return null;
-    }
-
-    public void sleep() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     @Step("Verifying that contact was correctly created.")
@@ -95,9 +87,12 @@ public class ContactDetailsPage extends BasePage {
 
     @Step("Deleting contact")
     public ContactsPage deleteContact() {
-        wait.until(ExpectedConditions.visibilityOf(inputFirstName));
-        contactCreated.click();
+        isPageOpened();
+        AllureUtils.takeScreenshot(driver);
+        log.info("Contact was opened.");
+        actionsMenu.click();
         deleteButton.click();
+        log.info("Delete button was clicked.");
         return new ContactsPage(driver, wait);
     }
 }

@@ -5,7 +5,6 @@ import io.qameta.allure.Link;
 import models.Company;
 import models.Contact;
 import models.User;
-import org.testng.annotations.Ignore;
 import org.testng.annotations.Test;
 
 import java.util.UUID;
@@ -44,11 +43,12 @@ public class InperiumTests extends BaseTest {
     }
 
     @Test(description = "3. Delete company.", priority = 3)
-    @Ignore
     public void deleteCompany() {
         loginPage
                 .openPage()
-                .login(user)
+                .login(user);
+        companiesPage
+                .openPage()
                 .searchAndOpenCompany(updatedCompany)
                 .deleteCompany()
                 .verifyThatCompanyWasDeleted(updatedCompany);
@@ -79,7 +79,6 @@ public class InperiumTests extends BaseTest {
     }
 
     @Test(description = "6. Delete contact.", priority = 6)
-    @Ignore
     public void deleteContact() {
         loginPage
                 .openPage()
@@ -90,6 +89,4 @@ public class InperiumTests extends BaseTest {
                 .deleteContact()
                 .verifyThatContactWasDeleted(updatedContact);
     }
-
-
 }

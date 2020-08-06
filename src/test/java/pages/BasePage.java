@@ -16,4 +16,12 @@ public abstract class BasePage {
     public abstract BasePage isPageOpened();
 
     public abstract BasePage openPage();
+
+    public void sleep() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
 }
