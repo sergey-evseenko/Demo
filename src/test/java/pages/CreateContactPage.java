@@ -23,7 +23,8 @@ public class CreateContactPage extends BasePage {
     WebElement inputFirstName;
     @FindBy(name = "lastName")
     WebElement inputLastName;
-    @FindBy(xpath = "//div[contains(text(), 'Select...')]")
+    //@FindBy(xpath = "//div[contains(text(), 'Select...')]")
+    @FindBy(id = "react-select-3-input")
     WebElement dropdownCompany;
 
     public CreateContactPage(WebDriver driver, WebDriverWait wait) {
@@ -54,16 +55,14 @@ public class CreateContactPage extends BasePage {
         String locator = "//div[contains(text(),'%s')]";
         /*
         String param = "arguments[0].value='%s';";
-         */
+        */
         isPageOpened();
         AllureUtils.takeScreenshot(driver);
         log.info("'Create contact' pop-up was success opened.");
         inputEmail.sendKeys(contact.getEmail());
         inputFirstName.sendKeys(contact.getFirstName());
         inputLastName.sendKeys(contact.getLastName());
-        AllureUtils.takeScreenshot(driver);
         dropdownCompany.click();
-        AllureUtils.takeScreenshot(driver);
         wait.until(ExpectedConditions.visibilityOf(driver.findElement(By.xpath(String.format(locator, contact.getCompany())))));
         driver.findElement(By.xpath(String.format(locator, contact.getCompany()))).click();
         /*
