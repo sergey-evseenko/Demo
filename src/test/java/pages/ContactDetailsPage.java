@@ -22,7 +22,7 @@ public class ContactDetailsPage extends BasePage {
     WebElement inputFirstName;
     @FindBy(name = "lastName")
     WebElement inputLastName;
-    @FindBy(xpath = "//div[contains(text(), 'Save')]")
+    @FindBy(xpath = "//span[contains(text(), 'Save')]")
     WebElement saveButton;
     @FindBy(xpath = "//p[text()='Contact Created']")
     WebElement contactCreated;
@@ -32,14 +32,6 @@ public class ContactDetailsPage extends BasePage {
     public ContactDetailsPage(WebDriver driver, WebDriverWait wait) {
         super(driver, wait);
         PageFactory.initElements(driver, this);
-    }
-
-    public void sleep() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     @Override
@@ -53,9 +45,16 @@ public class ContactDetailsPage extends BasePage {
         return null;
     }
 
+    public void sleep() {
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     @Step("Verifying that contact was correctly created.")
     public void verifyThatContactWasCreated(Contact contact) {
-        sleep();
         isPageOpened();
         AllureUtils.takeScreenshot(driver);
         log.info("'Contact details' page was success opened.");
@@ -68,19 +67,26 @@ public class ContactDetailsPage extends BasePage {
 
     @Step("Updating and saving contact.")
     public ContactDetailsPage updateAndSaveContact(Contact updatedContact) {
-        wait.until(ExpectedConditions.visibilityOf(inputFirstName));
+        isPageOpened();
+        AllureUtils.takeScreenshot(driver);
+        log.info("'Contact details' page was success opened.");
         inputFirstName.clear();
         inputFirstName.sendKeys(updatedContact.getFirstName());
+        sleep();
         inputLastName.clear();
         inputLastName.sendKeys(updatedContact.getLastName());
+        sleep();
         saveButton.click();
         return this;
     }
 
     @Step("Verifying that contact was updated")
     public void verifyUpdatedContact(Contact updatedContact) {
+        sleep();
         driver.navigate().refresh();
-        wait.until(ExpectedConditions.visibilityOf(inputFirstName));
+        isPageOpened();
+        AllureUtils.takeScreenshot(driver);
+        log.info("Contact were updated with contact first name:" + updatedContact.getFirstName() + " and company domain: " + updatedContact.getLastName());
         String actualFirstName = inputFirstName.getAttribute("value");
         assertEquals(actualFirstName, updatedContact.getFirstName(), "Contact updating error. Contact first name.");
         String actualLastName = inputLastName.getAttribute("value");

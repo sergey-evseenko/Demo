@@ -52,9 +52,11 @@ public class CompaniesPage extends BasePage {
 
     @Step("Searching and opening company")
     public CompanyDetailsPage searchAndOpenCompany(Company company) {
-        String locator = "//div[contains(text(),'%s')]";
+        String locator = "//span[contains(text(),'%s')]";
         searchInput.sendKeys(company.getCompanyName());
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(locator, company.getCompanyName()))));
+        AllureUtils.takeScreenshot(driver);
+        log.info("Company with name: " + company.getCompanyName() + " was found.");
         driver.findElement(By.xpath(String.format(locator, company.getCompanyName()))).click();
         return new CompanyDetailsPage(driver, wait);
     }

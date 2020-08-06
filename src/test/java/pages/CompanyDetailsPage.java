@@ -25,7 +25,7 @@ public class CompanyDetailsPage extends BasePage {
     @FindBy(name = "domainName")
     WebElement inputDomainName;
 
-    @FindBy(xpath = "//div[contains(text(), 'Save')]")
+    @FindBy(xpath = "//span[contains(text(), 'Save')]")
     WebElement saveButton;
 
     @FindBy(xpath = "//p[text()='Company Created']")
@@ -39,6 +39,16 @@ public class CompanyDetailsPage extends BasePage {
         PageFactory.initElements(driver, this);
     }
 
+    public CompanyDetailsPage isPageOpened() {
+        wait.until(ExpectedConditions.visibilityOf(companyCreated));
+        return this;
+    }
+
+    @Override
+    public BasePage openPage() {
+        return null;
+    }
+
     public void sleep() {
         try {
             Thread.sleep(1000);
@@ -47,19 +57,8 @@ public class CompanyDetailsPage extends BasePage {
         }
     }
 
-    public CompanyDetailsPage isPageOpened() {
-        return this;
-    }
-
-    @Override
-    public CompanyDetailsPage openPage() {
-        wait.until(ExpectedConditions.visibilityOf(companyCreated));
-        return this;
-    }
-
     @Step("Verifying that company was correctly created.")
     public void verifyThatCompanyWasCreated(Company company) {
-        sleep();
         isPageOpened();
         AllureUtils.takeScreenshot(driver);
         log.info("'Company details' page was success opened.");
@@ -72,19 +71,26 @@ public class CompanyDetailsPage extends BasePage {
 
     @Step("Updating and saving company.")
     public CompanyDetailsPage updateAndSaveCompany(Company updatedCompany) {
-        wait.until(ExpectedConditions.visibilityOf(inputCompanyName));
+        isPageOpened();
+        AllureUtils.takeScreenshot(driver);
+        log.info("'Company details' page was success opened.");
         inputCompanyName.clear();
         inputCompanyName.sendKeys(updatedCompany.getCompanyName());
+        sleep();
         inputDomainName.clear();
         inputDomainName.sendKeys(updatedCompany.getCompanyDomain());
+        sleep();
         saveButton.click();
         return this;
     }
 
     @Step("Verifying that company was updated")
     public void verifyUpdatedCompany(Company updatedCompany) {
+        sleep();
         driver.navigate().refresh();
-        wait.until(ExpectedConditions.visibilityOf(inputCompanyName));
+        isPageOpened();
+        AllureUtils.takeScreenshot(driver);
+        log.info("Company were updated with company name:" + updatedCompany.getCompanyName() + " and company domain: " + updatedCompany.getCompanyDomain());
         String actualCompanyName = inputCompanyName.getAttribute("value");
         assertEquals(actualCompanyName, updatedCompany.getCompanyName(), "Company name updating Error.");
         String actualDomainName = inputDomainName.getAttribute("value");

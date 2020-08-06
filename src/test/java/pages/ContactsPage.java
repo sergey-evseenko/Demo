@@ -53,9 +53,11 @@ public class ContactsPage extends BasePage {
 
     @Step("Searching and opening contact.")
     public ContactDetailsPage searchAndOpenContact(Contact contact) {
-        String locator = "//div[contains(text(),'%s')]";
+        String locator = "//span[contains(text(),'%s')]";
         searchInput.sendKeys(contact.getFirstName());
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(String.format(locator, contact.getFirstName()))));
+        AllureUtils.takeScreenshot(driver);
+        log.info("Company with first name: " + contact.getFirstName() + " was found.");
         driver.findElement(By.xpath(String.format(locator, contact.getFirstName()))).click();
         return new ContactDetailsPage(driver, wait);
     }

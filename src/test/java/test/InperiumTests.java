@@ -32,11 +32,12 @@ public class InperiumTests extends BaseTest {
     }
 
     @Test(description = "2. Update company.", priority = 2)
-    @Ignore
     public void updateCompany() {
         loginPage
                 .openPage()
-                .login(user)
+                .login(user);
+        companiesPage
+                .openPage()
                 .searchAndOpenCompany(company)
                 .updateAndSaveCompany(updatedCompany)
                 .verifyUpdatedCompany(updatedCompany);
@@ -66,7 +67,6 @@ public class InperiumTests extends BaseTest {
     }
 
     @Test(description = "5. Update contact.", priority = 5)
-    @Ignore
     public void updateContact() {
         loginPage
                 .openPage()
