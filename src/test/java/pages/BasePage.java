@@ -2,19 +2,20 @@ package pages;
 
 
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class BasePage {
     WebDriver driver;
     WebDriverWait wait;
 
-    public BasePage(WebDriver driver, WebDriverWait wait) {
+    public BasePage(WebDriver driver) {
         this.driver = driver;
-        this.wait = wait;
+        wait = new WebDriverWait(this.driver, 10);
+        PageFactory.initElements(driver, this);
     }
 
     public abstract BasePage isPageOpened();
-
     public abstract BasePage openPage();
 
     public void sleep() {

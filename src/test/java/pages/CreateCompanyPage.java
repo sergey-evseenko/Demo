@@ -6,9 +6,7 @@ import models.Company;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.AllureUtils;
 
 @Log4j2
@@ -21,9 +19,8 @@ public class CreateCompanyPage extends BasePage {
     @FindBy(css = "button[type='submit']")
     WebElement submitButton;
 
-    public CreateCompanyPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-        PageFactory.initElements(driver, this);
+    public CreateCompanyPage(WebDriver driver) {
+        super(driver);
     }
 
     public CreateCompanyPage isPageOpened() {
@@ -48,6 +45,6 @@ public class CreateCompanyPage extends BasePage {
         AllureUtils.takeScreenshot(driver);
         wait.until(ExpectedConditions.elementToBeClickable(submitButton));
         submitButton.click();
-        return new CompanyDetailsPage(driver, wait);
+        return new CompanyDetailsPage(driver);
     }
 }

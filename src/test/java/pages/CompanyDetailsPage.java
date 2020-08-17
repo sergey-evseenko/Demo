@@ -6,9 +6,7 @@ import models.Company;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.AllureUtils;
 
 import static org.testng.Assert.assertEquals;
@@ -34,9 +32,8 @@ public class CompanyDetailsPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(),'•••')]")
     WebElement actionsMenu;
 
-    public CompanyDetailsPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-        PageFactory.initElements(driver, this);
+    public CompanyDetailsPage(WebDriver driver) {
+        super(driver);
     }
 
     public CompanyDetailsPage isPageOpened() {
@@ -97,7 +94,7 @@ public class CompanyDetailsPage extends BasePage {
         actionsMenu.click();
         deleteButton.click();
         log.info("Delete button was clicked.");
-        return new CompaniesPage(driver, wait);
+        return new CompaniesPage(driver);
     }
 
 

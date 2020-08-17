@@ -1,15 +1,15 @@
 package test;
 
-
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import pages.*;
 import utils.CapabilitiesGenerator;
 import utils.TestListener;
+
+import java.util.concurrent.TimeUnit;
 
 @Listeners(TestListener.class)
 public abstract class BaseTest {
@@ -21,21 +21,21 @@ public abstract class BaseTest {
     CompanyDetailsPage companyDetailsPage;
     ContactDetailsPage contactDetailsPage;
 
-    private WebDriver driver;
-    private WebDriverWait webDriverWait;
+    private WebDriver driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
 
+    //TODO Change BeforeMethod => BeforeClass
     @BeforeMethod(description = "Opening chrome Driver.")
     public void setDriver() {
-        driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
-        webDriverWait = new WebDriverWait(this.driver, 30);
+        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
-        loginPage = new LoginPage(driver, webDriverWait);
-        companyDetailsPage = new CompanyDetailsPage(driver, webDriverWait);
-        companiesPage = new CompaniesPage(driver, webDriverWait);
-        createCompanyPage = new CreateCompanyPage(driver, webDriverWait);
-        contactDetailsPage = new ContactDetailsPage(driver, webDriverWait);
-        contactsPage = new ContactsPage(driver, webDriverWait);
-        createContactPage = new CreateContactPage(driver, webDriverWait);
+        loginPage = new LoginPage(driver);
+        companyDetailsPage = new CompanyDetailsPage(driver);
+        companiesPage = new CompaniesPage(driver);
+        createCompanyPage = new CreateCompanyPage(driver);
+        contactDetailsPage = new ContactDetailsPage(driver);
+        contactsPage = new ContactsPage(driver);
+        createContactPage = new CreateContactPage(driver);
+
     }
 
     @AfterMethod(description = "Closing chrome Driver.", alwaysRun = true)

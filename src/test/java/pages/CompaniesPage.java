@@ -7,9 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.AllureUtils;
 
 import java.util.List;
@@ -26,9 +24,8 @@ public class CompaniesPage extends BasePage {
     WebElement searchInput;
 
 
-    public CompaniesPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-        PageFactory.initElements(driver, this);
+    public CompaniesPage(WebDriver driver) {
+        super(driver);
     }
 
     public CompaniesPage isPageOpened() {
@@ -50,7 +47,7 @@ public class CompaniesPage extends BasePage {
     public CreateCompanyPage createCompanyButtonClick() {
         createCompanyButton.click();
         log.info("'Create company' button was clicked.");
-        return new CreateCompanyPage(driver, wait);
+        return new CreateCompanyPage(driver);
 
     }
 
@@ -62,7 +59,7 @@ public class CompaniesPage extends BasePage {
         AllureUtils.takeScreenshot(driver);
         log.info("Company with name: " + company.getCompanyName() + " was found.");
         driver.findElement(By.xpath(String.format(locator, company.getCompanyName()))).click();
-        return new CompanyDetailsPage(driver, wait);
+        return new CompanyDetailsPage(driver);
     }
 
     @Step("Verifying that company was successfully deleted")

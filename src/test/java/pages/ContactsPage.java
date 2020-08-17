@@ -7,9 +7,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.AllureUtils;
 
 import java.util.List;
@@ -23,9 +21,8 @@ public class ContactsPage extends BasePage {
     @FindBy(name = "query")
     WebElement searchInput;
 
-    public ContactsPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-        PageFactory.initElements(driver, this);
+    public ContactsPage(WebDriver driver) {
+        super(driver);
     }
 
     public ContactsPage isPageOpened() {
@@ -52,7 +49,7 @@ public class ContactsPage extends BasePage {
     public CreateContactPage createContactButtonClick() {
         createContactButton.click();
         log.info("'Create contact' button was clicked.");
-        return new CreateContactPage(driver, wait);
+        return new CreateContactPage(driver);
     }
 
     @Step("Searching and opening contact.")
@@ -63,7 +60,7 @@ public class ContactsPage extends BasePage {
         AllureUtils.takeScreenshot(driver);
         log.info("Contact with first name: " + contact.getFirstName() + " was found.");
         driver.findElement(By.xpath(String.format(locator, contact.getFirstName()))).click();
-        return new ContactDetailsPage(driver, wait);
+        return new ContactDetailsPage(driver);
     }
 
     @Step("Verifying that contact was successfully deleted")

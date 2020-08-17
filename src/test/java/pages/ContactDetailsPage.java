@@ -6,9 +6,7 @@ import models.Contact;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import utils.AllureUtils;
 
 import static org.testng.Assert.assertEquals;
@@ -29,9 +27,8 @@ public class ContactDetailsPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(),'•••')]")
     WebElement actionsMenu;
 
-    public ContactDetailsPage(WebDriver driver, WebDriverWait wait) {
-        super(driver, wait);
-        PageFactory.initElements(driver, this);
+    public ContactDetailsPage(WebDriver driver) {
+        super(driver);
     }
 
     @Override
@@ -93,6 +90,6 @@ public class ContactDetailsPage extends BasePage {
         actionsMenu.click();
         deleteButton.click();
         log.info("Delete button was clicked.");
-        return new ContactsPage(driver, wait);
+        return new ContactsPage(driver);
     }
 }
