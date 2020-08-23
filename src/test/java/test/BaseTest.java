@@ -43,5 +43,4 @@ public abstract class BaseTest {
     public void closeDriver() {
         driver.quit();
     }
-
 }
