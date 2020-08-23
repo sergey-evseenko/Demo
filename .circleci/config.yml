@@ -57,6 +57,6 @@ workflows:
                 - master
     jobs:
       - Inperium
-notify:
-  webhooks:
-    - url: https://outlook.office.com/webhook/1639a041-d876-4dfa-b560-42f5fe99b12b@6ce6a159-fd7d-4155-ad53-5d92f3ca83eb/CircleCI/9aaf82d376d84102b67ab5de8d7bbac8/84650361-e62a-4f6e-afb6-a6606e9b4690
+  #notify:
+  #  webhooks:
+  #   - url: https://outlook.office.com/webhook/1639a041-d876-4dfa-b560-42f5fe99b12b@6ce6a159-fd7d-4155-ad53-5d92f3ca83eb/CircleCI/9aaf82d376d84102b67ab5de8d7bbac8/84650361-e62a-4f6e-afb6-a6606e9b4690
