@@ -21,11 +21,12 @@ public abstract class BaseTest {
     CompanyDetailsPage companyDetailsPage;
     ContactDetailsPage contactDetailsPage;
 
-    private WebDriver driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
+    private WebDriver driver;
 
     //TODO Change BeforeMethod => BeforeClass
     @BeforeMethod(description = "Opening chrome Driver.")
     public void setDriver() {
+        driver = new ChromeDriver(CapabilitiesGenerator.getChromeOptions());
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         driver.manage().window().maximize();
         loginPage = new LoginPage(driver);
@@ -42,6 +43,5 @@ public abstract class BaseTest {
     public void closeDriver() {
         driver.quit();
     }
-
 
 }

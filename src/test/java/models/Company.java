@@ -1,5 +1,10 @@
 package models;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Company {
     String companyName;
     String companyDomain;
@@ -9,21 +14,6 @@ public class Company {
         this.companyDomain = companyDomain;
     }
 
-    public String getCompanyName() {
-        return companyName;
-    }
-
-    public void setCompanyName(String companyName) {
-        this.companyName = companyName;
-    }
-
-    public String getCompanyDomain() {
-        return companyDomain;
-    }
-
-    public void setCompanyDomain(String companyDomain) {
-        this.companyDomain = companyDomain;
-    }
 }
 
 

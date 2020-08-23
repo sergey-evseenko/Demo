@@ -14,13 +14,13 @@ import utils.AllureUtils;
 public class LoginPage extends BasePage {
 
 
-    @FindBy(css = "#username")
+    @FindBy(name = "email")
     WebElement inputEmail;
-    @FindBy(css = "#password")
+    @FindBy(name = "password")
     WebElement inputPassword;
-    @FindBy(css = "#kc-login")
+    @FindBy(xpath = "//span[contains(text(), 'Log In')]")
     WebElement loginButton;
-    @FindBy(xpath = "//div[contains(text(), 'Deals Revenue')]")
+    @FindBy(xpath = "//h4[contains(text(), 'John Doe')]")
     WebElement widgetDealsRevenue;
 
     public LoginPage(WebDriver driver) {
@@ -34,7 +34,7 @@ public class LoginPage extends BasePage {
 
     @Step("Opening login page.")
     public LoginPage openPage() {
-        driver.get("https://sell.qa.inperium.dev");
+        driver.get("https://account.qa.inperium.dev/login");
         isPageOpened();
         AllureUtils.takeScreenshot(driver);
         log.info("Login page was success opened.");

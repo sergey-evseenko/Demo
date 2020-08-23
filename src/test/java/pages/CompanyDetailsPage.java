@@ -23,7 +23,7 @@ public class CompanyDetailsPage extends BasePage {
     @FindBy(xpath = "//span[contains(text(), 'Save')]")
     WebElement saveButton;
 
-    @FindBy(xpath = "//p[text()='Company Created']")
+    @FindBy(xpath = "//h5[text()='Company created']")
     WebElement companyCreated;
 
     @FindBy(xpath = "//div[contains(text(), 'Delete')]")
