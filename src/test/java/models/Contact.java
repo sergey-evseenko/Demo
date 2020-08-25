@@ -1,21 +1,13 @@
 package models;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.AllArgsConstructor;
+import lombok.Data;
 
-@Getter
-@Setter
+@Data
+@AllArgsConstructor
 public class Contact {
     String email;
     String firstName;
     String lastName;
     String company;
-
-    public Contact(String email, String firstName, String lastName, String company) {
-        this.email = email;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.company = company;
-    }
-
 }
