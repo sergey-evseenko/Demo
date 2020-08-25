@@ -12,7 +12,7 @@ Selenium WebDriver / Maven / TestNG
 
 * **CI:** Circle CI
 * **Reporting:** Allure
-* **Logging:** Lombok
+* **Logging:** Lombok and Log4J
 
 **Additional:**
 1. TestListener
