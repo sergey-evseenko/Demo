@@ -10,9 +10,9 @@ Selenium WebDriver / Maven / TestNG
 5. Value objects
 
 
-1. **CI:** Circle CI
-2. **Reporting:** Allure
-3. **Logging:** Lombok
+* **CI:** Circle CI
+* **Reporting:** Allure
+* **Logging:** Lombok
 
 **Additional:**
 1. TestListener
