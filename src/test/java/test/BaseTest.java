@@ -7,12 +7,14 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Listeners;
 import pages.*;
 import utils.CapabilitiesGenerator;
+import utils.PropertyManager;
 import utils.TestListener;
 
 import java.util.concurrent.TimeUnit;
 
 @Listeners(TestListener.class)
 public abstract class BaseTest {
+    PropertyManager props;
     LoginPage loginPage;
     CompaniesPage companiesPage;
     ContactsPage contactsPage;
@@ -20,6 +22,8 @@ public abstract class BaseTest {
     CreateContactPage createContactPage;
     CompanyDetailsPage companyDetailsPage;
     ContactDetailsPage contactDetailsPage;
+    String email;
+    String password;
 
     private WebDriver driver;
 
@@ -36,6 +40,9 @@ public abstract class BaseTest {
         contactDetailsPage = new ContactDetailsPage(driver);
         contactsPage = new ContactsPage(driver);
         createContactPage = new CreateContactPage(driver);
+        props = new PropertyManager();
+        email = props.get("email");
+        password = props.get("password");
 
     }
 

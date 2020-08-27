@@ -2,7 +2,6 @@ package pages;
 
 import io.qameta.allure.Step;
 import lombok.extern.log4j.Log4j2;
-import models.User;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -12,7 +11,6 @@ import utils.AllureUtils;
 
 @Log4j2
 public class LoginPage extends BasePage {
-
 
     @FindBy(name = "email")
     WebElement inputEmail;
@@ -42,9 +40,9 @@ public class LoginPage extends BasePage {
     }
 
     @Step("Providing login and pass. Clicking login button.")
-    public void login(User user) {
-        inputEmail.sendKeys(user.getEmail());
-        inputPassword.sendKeys(user.getPassword());
+    public void login(String email, String password) {
+        inputEmail.sendKeys(email);
+        inputPassword.sendKeys(password);
         loginButton.click();
         wait.until(ExpectedConditions.visibilityOf(widgetDealsRevenue));
         AllureUtils.takeScreenshot(driver);
